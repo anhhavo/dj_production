@@ -1,0 +1,25 @@
+version: '3' 
+
+services:  #Define list of services that our application is going to use
+  django_app:  #Here is our Django + Gunicorn
+    build: .   #Path to the Dockerfile  
+    env_file:  #Provide environment file  
+      - .env
+    volumes:   #Define storage mapping between host and the container
+      - static_vol:/myapp/members/static
+      - media_vol:/myapp/members/media
+    ports:   #Expose container port 8000 through host's 8000
+      - "8000:8000"
+
+  nginx:      #Here is our Nginx 
+    build: ./nginx  #Path to the Dockerfile of Nginx
+    volumes:
+      - static_vol:/myapp/members/static
+      - media_vol:/myapp/members/media
+    ports:
+      - "80:80"
+    depends_on:  #Specify the service on which the current service depends on
+      - django_app
+volumes:
+  static_vol:
+  media_vol:

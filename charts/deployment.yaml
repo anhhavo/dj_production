@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: webapp-d
+spec:
+  replicas: 3 #create 3 pods 
+  selector:
+    matchLabels:
+      app: webapp-d
+  template:
+    metadata:
+      labels:
+        app: webapp-d
+    spec:
+      containers:
+      - name: webapp-d
+        image: anhhavo/dj_testapp:latesttest2
+        #command: ["python", "/myapp/myapp/manage.py", "runserver"]
+        ports:
+          - containerPort: 8000
+        livenessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - backend
