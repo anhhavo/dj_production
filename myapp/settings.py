@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('Name'),
-        'USER': config('User'),
-        'PASSWORD': config('Password'),
-        'HOST': config('Host'),
+        'NAME': 'djdatabase', #config('Name'),
+        'USER': 'postgres', #config('User'),
+        'PASSWORD': 'dowc123$', #config('Password'),
+        'HOST': 'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com', #config('Host'),
         'PORT': 5432
     }
 }
