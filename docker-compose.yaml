@@ -4,7 +4,7 @@ services:  #Define list of services that our application is going to use
   django_app:  #Here is our Django + Gunicorn
     build: .   #Path to the Dockerfile  
     env_file:  #Provide environment file  
-      - .env
+      - /myapp/.env
     volumes:   #Define storage mapping between host and the container
       - static_vol:/myapp/members/static
       - media_vol:/myapp/members/media

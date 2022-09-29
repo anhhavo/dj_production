@@ -14,15 +14,21 @@ from pathlib import Path
 from pickle import TRUE
 from decouple import config
 import os
+import environ
+
+#Initialize Environment Variables
+env = environ.Env()
+
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',default=False,cast=bool)
@@ -80,10 +86,10 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djdatabase', #config('Name'),
-        'USER': 'postgres', #config('User'),
-        'PASSWORD': 'dowc123$', #config('Password'),
-        'HOST': 'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com', #config('Host'),
+        'NAME': env('Name'),#'djdatabase', #config('Name'),
+        'USER': env('User'),#'postgres',#config('User'),
+        'PASSWORD': env('Password'), #'dowc123$',#config('Password'),
+        'HOST': env('Host'),#'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com', #config('Host'),
         'PORT': 5432
     }
 }
@@ -133,4 +139,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'members','media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CSRF_TRUSTED_ORIGINS = ['http://*.mydomain.com', 'http://*.127.0.0.1', 'http://23.21.15.44', 'http://dowcai.com','https://dowcai.com','https://23.21.15.44']
+
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1', 'https://dowcai.com','https://23.21.15.44']
+
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('Name'),#'djdatabase', #config('Name'),
+        'USER': env('User'),#'postgres',#config('User'),
+        'PASSWORD': env('Password'), #'dowc123$',#config('Password'),
+        'HOST': env('Host'),#'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com', #config('Host'),
+        'PORT': 5432
+    }
+}
+'''
