@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('Name'),#'djdatabase', #config('Name'),
-        'USER': env('User'),#'postgres',#config('User'),
-        'PASSWORD': env('Password'), #'dowc123$',#config('Password'),
-        'HOST': env('Host'),#'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com', #config('Host'),
+        'NAME': env('Name'),
+        'USER': env('User'),
+        'PASSWORD': env('Password'),
+        'HOST': 'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com',#env('Host'),
         'PORT': 5432
     }
 }
@@ -142,15 +142,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1', 'https://dowcai.com','https://23.21.15.44']
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('Name'),#'djdatabase', #config('Name'),
-        'USER': env('User'),#'postgres',#config('User'),
-        'PASSWORD': env('Password'), #'dowc123$',#config('Password'),
-        'HOST': env('Host'),#'database-1.cde9hl08tkz5.us-east-1.rds.amazonaws.com', #config('Host'),
-        'PORT': 5432
-    }
-}
-'''
